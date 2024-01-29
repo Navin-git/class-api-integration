@@ -1,9 +1,12 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 const EditInvoice = () => {
+  const { id } = useParams();
   const [inputData, setInputData] = useState({
     name: "",
-    Category: "",
+    P_Category: "",
     exp: "",
     rate: "",
     ["Re-order"]: "",
@@ -17,8 +20,8 @@ const EditInvoice = () => {
     if (!value.name) {
       newErr = { ...newErr, name: "No name" };
     }
-    if (!value.Category) {
-      newErr = { ...newErr, Category: "No Category" };
+    if (!value.P_Category) {
+      newErr = { ...newErr, P_Category: "No P_Category" };
     }
     if (!value.rate) {
       newErr = { ...newErr, rate: "No rate" };
@@ -55,6 +58,24 @@ const EditInvoice = () => {
     console.log("okay", inputData);
   };
 
+  const getInvoice = () => {
+    axios
+      .get(`http://localhost:3000/invoice/?id=${id}`)
+      .then((res) => {
+        setInputData({
+          ...res.data[0],
+          P_Category: res?.data[0]?.Category,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    id && getInvoice();
+  }, [id]);
+
   useEffect(() => {
     if (Object.keys(error).length === 0 && isValidate) {
       postData();
@@ -76,15 +97,15 @@ const EditInvoice = () => {
           <p className="text-sm text-red-500">{error?.name}</p>
         </div>
         <div className="productInput">
-          <label htmlFor="Category">Category</label>
+          <label htmlFor="P_Category">P_Category</label>
           <input
             type="text"
             onChange={handleChange}
-            value={inputData.Category}
-            name="Category"
-            id="Category"
+            value={inputData.P_Category}
+            name="P_Category"
+            id="P_Category"
           />
-          <p className="text-sm text-red-500">{error?.Category}</p>
+          <p className="text-sm text-red-500">{error?.P_Category}</p>
         </div>
         <div className="productInput col-span-2">
           <label htmlFor="Exp">Exp Date</label>

@@ -1,0 +1,31 @@
+{
+  "invoice": [
+    {
+      "id": 1,
+      "name": "Product 1",
+      "Category": "Electronics",
+      "exp": "2024-12-31",
+      "rate": "49.99",
+      "Re-order": "Yes",
+      "Qty": 100
+    },
+    {
+      "id": 2,
+      "name": "Product 2",
+      "Category": "Clothing",
+      "exp": "2024-10-15",
+      "rate": "29.95",
+      "Re-order": "No",
+      "Qty": 50
+    },
+    {
+      "id": 3,
+      "name": "Product 3",
+      "Category": "Home and Garden",
+      "exp": "2025-03-20",
+      "rate": "79.99",
+      "Re-order": "Yes",
+      "Qty": 75
+    }
+  ]
+}

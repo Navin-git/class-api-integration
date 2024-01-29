@@ -1,43 +1,22 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const InvoiceList = () => {
-  const [invoiceList, setInvoiceList] = useState([
-    {
-      title: "nabin",
-      dec: "this is nabin",
-      id: 1,
-      price: 200,
-      qty: "4",
-      image:
-        "https://img.freepik.com/free-photo/painting-mountain-lake-with-mountain-background_188544-9126.jpg",
-    },
-    {
-      title: "jubin",
-      dec: "this is jubin",
-      id: 2,
-      price: 400,
-      qty: 8,
-      image:
-        "https://slp-statics.astockcdn.net/static_assets/staging/24winter/home/curated-collections/card-2.jpg?width=580",
-    },
-    {
-      title: "Saroj",
-      dec: "this is saroj",
-      id: 3,
-      price: 100,
-      qty: 3,
-      image:
-        "https://media.istockphoto.com/id/1225173869/photo/house-boat-anchored-in-lake-with-jungle-background-backwaters-kerala-india.jpg?s=612x612&w=0&k=20&c=uo-bsRQjhlT9AgeWBs_pkSvHQwStCelMC75EUpzwjHU=",
-    },
-    {
-      title: "Suraj",
-      dec: "this is Suraj",
-      id: 4,
-      price: 300,
-      qty: 400,
-    },
-  ]);
+  const [invoiceList, setInvoiceList] = useState([]);
+  const getInvoiceList = () => {
+    axios
+      .get("http://localhost:3000/invoice/")
+      .then((res) => {
+        setInvoiceList(res?.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  useEffect(() => {
+    getInvoiceList();
+  }, []);
   return (
     <div className="bg-slate-700 min-h-screen w-full text-white p-6">
       <div className="flex gap-2 justify-between">

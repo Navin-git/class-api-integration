@@ -1,4 +1,6 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddInvoice = () => {
   const [inputData, setInputData] = useState({
@@ -11,6 +13,8 @@ const AddInvoice = () => {
   });
   const [error, setError] = useState({});
   const [isValidate, setIsValidate] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const validation = (value) => {
     let newErr = {};
@@ -51,8 +55,24 @@ const AddInvoice = () => {
     });
   };
 
-  const postData = () => {
-    console.log("okay", inputData);
+  const postData = async () => {
+    setLoading(true);
+    await axios
+      .post("http://localhost:3000/invoice", inputData)
+      .then((res) => {
+        console.log(res);
+        setInputData({
+          name: "",
+          Category: "",
+          exp: "",
+          rate: "",
+          ["Re-order"]: "",
+          Qty: "",
+        });
+        navigate("/invoice");
+      })
+      .catch((err) => console.log(err));
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -63,7 +83,10 @@ const AddInvoice = () => {
   return (
     <div className="bg-slate-700 min-h-screen w-full text-white p-6">
       <h1 className="text-xl text-center">Add Inovice</h1>
-      <form className="grid grid-cols-2 gap-4 mt-6 my-4">
+      <form
+        onSubmit={handelSubmit}
+        className="grid grid-cols-2 gap-4 mt-6 my-4"
+      >
         <div className="productInput">
           <label htmlFor="name">Name</label>
           <input
@@ -127,6 +150,14 @@ const AddInvoice = () => {
             id="Qty"
           />
           <p className="text-sm text-red-500">{error?.Qty}</p>
+        </div>
+        <div className=" col-span-2 flex justify-end">
+          <button
+            type="submit"
+            className="bg-slate-400 relative py-2 h-10 px-10 rounded-lg"
+          >
+            {loading ? <div className="spinner"></div> : "submit"}
+          </button>
         </div>
         {/* <Button title={"Submit"} type="submit" className="col-span-2" /> */}
       </form>

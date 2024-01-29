@@ -44,10 +44,10 @@ const InvoiceList = () => {
             return (
               <tr className="even:bg-slate-500" key={item.id}>
                 <td>{index + 1}</td>
-                <td>{item?.title}</td>
-                <td>{item?.qty}</td>
-                <td>{item?.price}</td>
-                <td>{item?.qty * item?.price}</td>
+                <td>{item?.name}</td>
+                <td>{item?.Qty}</td>
+                <td>{item?.rate}</td>
+                <td>{item?.Qty * item?.rate}</td>
                 <td className="flex gap-6 justify-center">
                   <button className="py-0.5 flex items-center px-4 rounded-md bg-red-400">
                     del

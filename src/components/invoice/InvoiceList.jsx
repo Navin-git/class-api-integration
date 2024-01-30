@@ -14,6 +14,14 @@ const InvoiceList = () => {
         console.log(err);
       });
   };
+  const deleteInvoice = async (id) => {
+    await axios
+      .delete(`http://localhost:3000/invoice/${id}`)
+      .then((res) => {
+        getInvoiceList();
+      })
+      .catch((err) => console.log(err));
+  };
   useEffect(() => {
     getInvoiceList();
   }, []);
@@ -49,7 +57,12 @@ const InvoiceList = () => {
                 <td>{item?.rate}</td>
                 <td>{item?.Qty * item?.rate}</td>
                 <td className="flex gap-6 justify-center">
-                  <button className="py-0.5 flex items-center px-4 rounded-md bg-red-400">
+                  <button
+                    onClick={() => {
+                      deleteInvoice(item?.id);
+                    }}
+                    className="py-0.5 flex items-center px-4 rounded-md bg-red-400"
+                  >
                     del
                   </button>
                   <Link

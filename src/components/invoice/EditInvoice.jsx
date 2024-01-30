@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const EditInvoice = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [inputData, setInputData] = useState({
     name: "",
     P_Category: "",
@@ -12,6 +13,7 @@ const EditInvoice = () => {
     ["Re-order"]: "",
     Qty: "",
   });
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState({});
   const [isValidate, setIsValidate] = useState(false);
 
@@ -54,8 +56,16 @@ const EditInvoice = () => {
     });
   };
 
-  const postData = () => {
-    console.log("okay", inputData);
+  const postData = async () => {
+    setLoading(true);
+    await axios
+      .patch(`http://localhost:3000/invoice/${id}`, inputData)
+      .then((res) => {
+        console.log(res);
+        navigate("/invoice");
+      })
+      .catch((err) => console.log(err));
+    setLoading(false);
   };
 
   const getInvoice = () => {
@@ -83,8 +93,11 @@ const EditInvoice = () => {
   }, [error, isValidate]);
   return (
     <div className="bg-slate-700 min-h-screen w-full text-white p-6">
-      <h1 className="text-xl text-center">Add Inovice</h1>
-      <form className="grid grid-cols-2 gap-4 mt-6 my-4">
+      <h1 className="text-xl text-center">Edit Inovice</h1>
+      <form
+        onSubmit={handelSubmit}
+        className="grid grid-cols-2 gap-4 mt-6 my-4"
+      >
         <div className="productInput">
           <label htmlFor="name">Name</label>
           <input
@@ -148,6 +161,14 @@ const EditInvoice = () => {
             id="Qty"
           />
           <p className="text-sm text-red-500">{error?.Qty}</p>
+        </div>
+        <div className=" col-span-2 flex justify-end">
+          <button
+            type="submit"
+            className="bg-slate-400 relative py-2 h-10 px-10 rounded-lg"
+          >
+            {loading ? <div className="spinner"></div> : "submit"}
+          </button>
         </div>
         {/* <Button title={"Submit"} type="submit" className="col-span-2" /> */}
       </form>

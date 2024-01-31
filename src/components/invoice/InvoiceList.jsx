@@ -1,6 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+
 import { Link } from "react-router-dom";
+import ProductChart from "./Chart";
+import ProductTimeline from "./ProductTimeline";
 
 const InvoiceList = () => {
   const [invoiceList, setInvoiceList] = useState([]);
@@ -25,6 +28,7 @@ const InvoiceList = () => {
   useEffect(() => {
     getInvoiceList();
   }, []);
+
   return (
     <div className="bg-slate-700 min-h-screen w-full text-white p-6">
       <div className="flex gap-2 justify-between">
@@ -77,6 +81,8 @@ const InvoiceList = () => {
           })}
         </tbody>
       </table>
+      <ProductChart invoiceList={invoiceList} />
+      <ProductTimeline invoiceList={invoiceList} />
     </div>
   );
 };

@@ -4,6 +4,7 @@ import InvoiceList from "./components/invoice/InvoiceList";
 import "./App.css";
 import AddInvoice from "./components/invoice/AddInvoice";
 import EditInvoice from "./components/invoice/EditInvoice";
+import Home from "./components/Home";
 
 const App = () => {
   const routes = useRoutes([
@@ -13,7 +14,7 @@ const App = () => {
       children: [
         {
           index: true,
-          element: <Link to="/invoice">Invoice</Link>,
+          element: <Home />,
         },
         {
           path: "invoice",

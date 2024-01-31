@@ -16,7 +16,7 @@
       "exp": "2024-01-17",
       "rate": "213",
       "Re-order": "213",
-      "Qty": "2133",
+      "Qty": "66",
       "P_Category": "dsafsdaf"
     },
     {
@@ -26,7 +26,8 @@
       "exp": "2024-01-17",
       "rate": "213",
       "Re-order": "213",
-      "Qty": "2133"
+      "Qty": "10",
+      "P_Category": "dsafsdaf"
     },
     {
       "id": "17f3",
@@ -35,7 +36,7 @@
       "exp": "2024-01-16",
       "rate": "324",
       "Re-order": "234",
-      "Qty": "324342",
+      "Qty": "100",
       "P_Category": "dsafdsaf"
     },
     {
@@ -45,7 +46,8 @@
       "exp": "2024-01-16",
       "rate": "324",
       "Re-order": "234",
-      "Qty": "324342"
+      "Qty": "121",
+      "P_Category": "dsafdsaf"
     }
   ]
 }
